@@ -1,1 +1,2 @@
-# book-trading-club
+# Book Trading Club
+## A fullstack application for freeCodeCamp
