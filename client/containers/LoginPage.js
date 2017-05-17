@@ -14,7 +14,8 @@ class LoginPage extends Component {
       message: ''
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -46,9 +47,25 @@ class LoginPage extends Component {
     }
   }
 
-  handleSubmit(event) {
+  handleLogin(event) {
     event.preventDefault();
-    console.log('here');
+    const response = axios.post('/login', {
+      email: this.state.emailText_login,
+      password: this.state.passwordText_login
+    });
+
+    response.then(({ data }) => {
+      console.log(data);
+      if (data.error) {
+        this.setState({ message: data.error });
+      } else {
+        // redirect to home page
+      }
+    });
+  }
+
+  handleSignup(event) {
+    event.preventDefault();
     const response = axios.post('/signup', {
       email: this.state.emailText_signup,
       password: this.state.passwordText_signup
@@ -68,7 +85,7 @@ class LoginPage extends Component {
     return (
       <div>
         log in
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleLogin}>
           <input
             type='email'
             value={this.state.emailText}
@@ -88,7 +105,7 @@ class LoginPage extends Component {
         </button>
         </form>
         sign up
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSignup}>
           <input
             type='email'
             value={this.state.emailText}
