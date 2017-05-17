@@ -18,8 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 const configureApp = require('./controllers/configureApp');
 configureApp(app);
 
-// TODO: create login and sign up routes
-// app.post('/login', passport.authenticate('local',))
+// use routes set up in routes.js
+app.use(require('./server/routes'));
 
 app.listen(port, () => {
   console.log(`App is listening on port: ${ port }`);

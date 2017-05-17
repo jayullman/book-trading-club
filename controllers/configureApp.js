@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/userModel');
+const User = require('../models/User');
 
 module.exports = function (app) {
   app.use(require('body-parser').urlencoded({ extended: true }));
