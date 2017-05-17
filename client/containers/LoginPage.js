@@ -7,15 +7,12 @@ class LoginPage extends Component {
     super(props);
 
     this.state = {
-      emailText_signup: '',
-      passwordText_signup: '',
-      emailText_login: '',
-      passwordText_login: '',
+      emailText: '',
+      passwordText: '',
       message: ''
     };
 
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleSignup = this.handleSignup.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -26,22 +23,14 @@ class LoginPage extends Component {
     const value = event.target.value;
 
     switch (targetName) {
-      case 'email_login':
-        this.setState({ emailText_login: value });
+      case 'email':
+        this.setState({ emailText: value });
         break;
 
-      case 'password_login':
-        this.setState({ passwordText_login: value });
+      case 'password':
+        this.setState({ passwordText: value });
         break;
       
-      case 'email_signup':
-        this.setState({ emailText_signup: value });
-        break;
-      
-      case 'password_signup':
-        this.setState({ passwordText_signup: value });
-        break;
-
       default:
         break;
     }
@@ -50,25 +39,8 @@ class LoginPage extends Component {
   handleLogin(event) {
     event.preventDefault();
     const response = axios.post('/login', {
-      email: this.state.emailText_login,
-      password: this.state.passwordText_login
-    });
-
-    response.then(({ data }) => {
-      console.log(data);
-      if (data.error) {
-        this.setState({ message: data.error });
-      } else {
-        // redirect to home page
-      }
-    });
-  }
-
-  handleSignup(event) {
-    event.preventDefault();
-    const response = axios.post('/signup', {
-      email: this.state.emailText_signup,
-      password: this.state.passwordText_signup
+      email: this.state.emailText,
+      password: this.state.passwordText
     });
 
     response.then(({ data }) => {
@@ -89,44 +61,21 @@ class LoginPage extends Component {
           <input
             type='email'
             value={this.state.emailText}
-            name='email_login'
+            name='email'
             onChange={this.handleInputChange}
           />
           <input
             type='password'
             value={this.state.passwordText}
-            name='password_login'
+            name='password'
             onChange={this.handleInputChange}
           />
           <button
-
           >
             Log in
         </button>
         </form>
-        sign up
-        <form onSubmit={this.handleSignup}>
-          <input
-            type='email'
-            value={this.state.emailText}
-            name='email_signup'            
-            onChange={this.handleInputChange}
-          />
-          <input
-            type='password'
-            value={this.state.passwordText}
-            name='password_signup'
-            onChange={this.handleInputChange}
-          />
-          <button
-
-          >
-            Sign up
-        </button>
-        </form>
-        <div className='message-display'>
-          {this.state.message}
-        </div>
+        
       </div>
       
     );
