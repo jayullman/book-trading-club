@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 // import npm module for Google Books API
 import * as books from 'google-books-search';
@@ -11,11 +11,14 @@ class BookSearchForm extends Component {
 
     this.state = {
       term: '',
-      thumbnailUrl: ''
+      thumbnail: '',
+      foundBookTitle: '',
+      message: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.findBook = this.findBook.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleChange(event) {
@@ -30,8 +33,23 @@ class BookSearchForm extends Component {
         console.log(err);
       } else {
         console.log(results);
-        this.setState({ thumbnailUrl: results[0].thumbnail })
+        this.setState({ 
+          thumbnail: results[0].thumbnail,
+          foundBookTitle: results[0].title 
+        });
       }
+    });
+  }
+
+  handleAdd() {
+    // TODO: create handleAdd function
+    const addBook = axios.post('/addBook', {
+      thumbnail: this.state.thumbnail,
+      title: this.state.foundBookTitle
+    });
+
+    addBook.then(({ data }) => {
+      console.log(data);
     });
   }
 
@@ -48,7 +66,13 @@ class BookSearchForm extends Component {
           <button>Find Book</button>
         </form>
         <div>
-          {this.state.thumbnailUrl && <img src={this.state.thumbnailUrl} />}
+          {this.state.thumbnail && 
+            <div>
+              <img src={this.state.thumbnail} />
+              <button onClick={this.handleAdd}>Add to your books</button>
+              <div>{this.state.message}</div>
+            </div>
+          }
         </div>
       </div>
     );

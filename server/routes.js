@@ -4,18 +4,10 @@ const passport = require('passport');
 const bcrypt = require('bcrypt-nodejs');
 
 const User = require('../models/User');
+const Book = require('../models/Book');
+const checkAuthenticated = require('../helpers/checkAuthenticated');
 
 const router = express.Router();
-
-// router.get('/test', (req, res) => {
- 
-// });
-// router.post('/login', (req, res) => {
-//   passport.authenticate('local', { failureRedirect: 'error-page.html' }),
-//     function (req, res, info) {
-//       res.redirect('/');
-//     }
-// });
 
 const error = {
   userExists: 'user exists',
@@ -67,6 +59,37 @@ router.post('/signup', (req, res) => {
           res.redirect('/');
         });
       })
+    }
+  });
+});
+
+router.post('/addBook', checkAuthenticated, (req, res) =>{
+  console.log(req.user.email);
+  const title = req.body.title;
+  const thumbnail = req.body.thumbnail;
+  const userEmail = req.user.email;
+
+  Book.findOne({ title }, (err, book) => {
+    if (err) throw err;
+
+    // if the title is unique for this user, add to the database
+    if (!book || (book && (book.owner !== userEmail))) {
+      // add book
+      const newBook = new Book({
+        title,
+        thumbnail,
+        owner: userEmail
+      });
+
+      // save new book to database
+      newBook.save((err) => {
+        if (err) throw err;
+        res.json({ message: 'This book has been added your collection' });
+      });
+      
+    } else {
+      // tell user that they have already added this book
+      res.json({ message: 'This book is already in your collection' });
     }
   });
 });
