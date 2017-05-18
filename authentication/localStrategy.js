@@ -14,7 +14,6 @@ module.exports = new LocalStrategy({
       }
       // if hash does not match
       if (!bcrypt.compareSync(password, user.password)) {
-        console.log('3');
         return done(null, true);
       }
 

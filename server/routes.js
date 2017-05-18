@@ -56,15 +56,14 @@ router.post('/signup', (req, res) => {
         // log new user in
         req.login(user, (err) => {
           if (err) return next(err);
-          res.redirect('/');
+          res.json({ message: 'success' });
         });
       })
     }
   });
 });
 
-router.post('/addBook', checkAuthenticated, (req, res) =>{
-  console.log(req.user.email);
+router.post('/addBook', checkAuthenticated, (req, res) => {
   const title = req.body.title;
   const thumbnail = req.body.thumbnail;
   const userEmail = req.user.email;
@@ -92,6 +91,34 @@ router.post('/addBook', checkAuthenticated, (req, res) =>{
       res.json({ message: 'This book is already in your collection' });
     }
   });
+});
+
+// get list of all books as array
+router.get('/allbooks', (req, res) => {
+  Book.find({}, (err, books) => {
+    if (err) throw err;
+
+    res.json({ books });
+  });
+});
+
+// get list of all books for one user
+router.get('/mybooks', checkAuthenticated, (req, res) => {
+  const userEmail = req.user.email;
+  Book.find({}, (err, books) => {
+    if (err) throw err;
+
+    const myBooks = books.filter(book => {
+      // check each book to see if it is the users
+      return book.owner === userEmail;
+    });
+    res.json({ books: myBooks });
+  });
+});
+
+// catch all other routes
+router.get('/*', (req, res) => {
+  res.redirect('/');
 });
 
 

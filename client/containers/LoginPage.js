@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
@@ -18,7 +19,6 @@ class LoginPage extends Component {
 
   // set state for all input fields
   handleInputChange(event) {
-    console.log(event.target.name);
     const targetName = event.target.name;
     const value = event.target.value;
 
@@ -44,11 +44,11 @@ class LoginPage extends Component {
     });
 
     response.then(({ data }) => {
-      console.log(data);
       if (data.error) {
         this.setState({ message: data.error });
       } else {
         // redirect to home page
+        this.context.router.history.push('/');
       }
     });
   }
@@ -80,6 +80,10 @@ class LoginPage extends Component {
       
     );
   }
+}
+
+LoginPage.contextTypes = {
+  router: PropTypes.object
 }
 
 export default LoginPage;
