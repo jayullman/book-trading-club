@@ -42,7 +42,6 @@ class BookSearchForm extends Component {
   }
 
   handleAdd() {
-    // TODO: create handleAdd function
     const addBook = axios.post('/addBook', {
       thumbnail: this.state.thumbnail,
       title: this.state.foundBookTitle

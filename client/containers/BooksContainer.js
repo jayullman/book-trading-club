@@ -12,14 +12,7 @@ class BooksContainer extends Component {
     };
 
     this.retrieveBooks = this.retrieveBooks.bind(this);
-  }
-
-  retrieveBooks(url) {
-    const books = axios(url);
-
-    books.then(({ data }) => {
-      this.setState({ books: data.books });
-    });
+    this.requestTrade = this.requestTrade.bind(this);
   }
 
   componentDidMount() {
@@ -34,12 +27,40 @@ class BooksContainer extends Component {
     }
   }
 
+  retrieveBooks(url) {
+    const books = axios(url);
+
+    books.then(({ data }) => {
+      this.setState({ books: data.books });
+    });
+  }
+
+  requestTrade(title) {
+    const updateBook = axios.post('/trade', {
+      title
+    });
+
+    updateBook.then(({ data }) => {
+      console.log(data);
+    });
+  }
+
   render() {
     let mappedBooks = [];
     if (this.state.books.length > 0) {
       mappedBooks = this.state.books.map(book => {
+        // Display book tiles. Add 'Request Trade' button for books not owned by current user
+        // when in the /allbooks route
         return (
-          <img key={book.title} src={book.thumbnail} />
+          <div key={book.title}>
+            <img src={book.thumbnail} />
+            {
+              // TODO: change text of button when trade is pending
+              // prevent 'request trade' button from showing up on user's owned books
+              this.props.url === '/allbooks' && this.props.isLoggedIn && (this.props.currentUser !== book.owner)
+              && <button onClick={this.requestTrade.bind(this, book.title)}>Request Trade</button>
+            }
+          </div>
         );
       });
     }

@@ -4,8 +4,9 @@ mongoose.Promise = global.Promise;
 const BookSchema = new mongoose.Schema({
   title: String,
   thumbnail: String,
+  owner: String,
   tradePending: { type: Boolean, default: false },
-  owner: String
+  tradeRequestedBy: String
 });
 
 const Book = mongoose.model('book', BookSchema);

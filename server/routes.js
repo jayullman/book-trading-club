@@ -116,6 +116,43 @@ router.get('/mybooks', checkAuthenticated, (req, res) => {
   });
 });
 
+router.get('/currentuser', checkAuthenticated, (req, res) => {
+  res.json({ currentUserEmail: req.user.email });
+});
+
+// requests trade
+router.post('/trade', checkAuthenticated, (req, res) => {
+  const userEmail = req.user.email;
+  const title = req.body.title;
+
+  Book.findOne({ title }, (err, book) => {
+    if (err) throw err;
+
+    if (book) {
+      console.log(book);
+      book.tradePending = true;
+      book.tradeRequestedBy = userEmail;
+
+      book.save((err, updatedBook) => {
+        if (err) throw err;
+
+        res.json(updatedBook);
+      });
+    } else {
+      res.json({ message: 'Book not found' });
+    }
+
+  });
+});
+
+router.get('/checkauthstatus', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ status: true });
+  } else {
+    res.json({ status: false });
+  }
+});
+
 // catch all other routes
 router.get('/*', (req, res) => {
   res.redirect('/');
