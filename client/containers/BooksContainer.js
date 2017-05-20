@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class BooksContainer extends Component {
   constructor(props) {
@@ -76,5 +77,10 @@ class BooksContainer extends Component {
     );
   }
 }
+
+BooksContainer.PropTypes = {
+  url: PropTypes.string.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
+};
 
 export default BooksContainer;
