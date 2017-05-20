@@ -28,7 +28,6 @@ class App extends Component {
 
   // perform these actions whenever the route is reloaded
   componentWillReceiveProps() {
-    console.log('mounted');
     this.checkAuthStatus()
       .then((loggedIn) => {
         if (loggedIn) {
