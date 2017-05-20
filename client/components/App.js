@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import HomePage from '../components/HomePage';
 import LoginPage from '../containers/LoginPage';
@@ -53,6 +54,18 @@ class App extends Component {
     });
   }
 
+  logOut() {
+    console.log('clicked logout');
+    axios.post('/logout')
+      .then(() => {
+        this.context.router.history.push('/');
+        this.setState({ isLoggedIn: false });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     const AllBooks = props =>
       <BooksContainer
@@ -72,7 +85,10 @@ class App extends Component {
 
     return (
       <div>
-        <Nav />
+        <Nav 
+          isLoggedIn={this.state.isLoggedIn}
+          logOut={this.logOut.bind(this)}
+        />
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -86,5 +102,8 @@ class App extends Component {
   } 
 }
   
+App.contextTypes = {
+  router: PropTypes.object
+}
 
 export default App;

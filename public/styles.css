@@ -1,4 +1,15 @@
-/*! normalize.css v6.0.0 | MIT License | github.com/necolas/normalize.css */
+.books-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book {
+  margin: 0 10px 30px 0;
+}
+
+.request-trade-btn {
+  display: block;
+}/*! normalize.css v6.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
    ========================================================================== */
@@ -429,4 +440,18 @@ html,
 body {
   margin: 0;
   padding: 0;
+}
+
+button {
+  border: 0;
+  background: none;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
+.btn-inactive {
+  background: #777;  
+  cursor: default;
 }

@@ -32,6 +32,11 @@ router.post('/login', function (req, res, next) {
   })(req, res, next);
 });
 
+router.post('/logout', function (req, res) {
+  req.logout();
+  res.sendStatus(200);
+});
+
 router.post('/signup', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
