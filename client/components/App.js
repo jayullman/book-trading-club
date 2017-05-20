@@ -66,6 +66,8 @@ class App extends Component {
     const MyBooks = props =>
       <BooksContainer
         url='/mybooks'
+        isLoggedIn={this.state.isLoggedIn}
+        currentUser={this.state.currentUser}
         {...props}
       />;
 
