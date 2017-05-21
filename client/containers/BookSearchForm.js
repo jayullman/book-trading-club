@@ -1,3 +1,5 @@
+// TODO: Handle case when user tries to submit a blank form
+
 import React, { Component } from 'react';
 
 import axios from 'axios';

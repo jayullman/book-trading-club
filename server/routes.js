@@ -113,8 +113,10 @@ router.post('/updateuserprofileinfo', checkAuthenticated, (req, res) => {
   });
 });
 
-// this route will check to see if the current password matches the password
-// in the database and will update to new password 
+/** 
+ * this route will check to see if the current password matches the password in 
+ * the database and will update to new password
+ */
 router.post('/updatepassword', checkAuthenticated, (req, res) => {
   const email = req.user.email;
   const currentPassword = req.body.currentPassword;
@@ -177,7 +179,7 @@ router.post('/addBook', checkAuthenticated, (req, res) => {
 });
 
 // get list of all books as array
-router.get('/allbooks', (req, res) => {
+router.get('/getallbooks', (req, res) => {
   Book.find({}, (err, books) => {
     if (err) throw err;
 
@@ -186,7 +188,7 @@ router.get('/allbooks', (req, res) => {
 });
 
 // get list of all books for one user
-router.get('/mybooks', checkAuthenticated, (req, res) => {
+router.get('/getmybooks', checkAuthenticated, (req, res) => {
   const userEmail = req.user.email;
   Book.find({}, (err, books) => {
     if (err) throw err;
@@ -204,7 +206,7 @@ router.get('/currentuser', checkAuthenticated, (req, res) => {
 });
 
 // requests trade
-router.post('/trade', checkAuthenticated, (req, res) => {
+router.post('/requesttrade', checkAuthenticated, (req, res) => {
   const userEmail = req.user.email;
   const title = req.body.title;
 
@@ -227,6 +229,55 @@ router.post('/trade', checkAuthenticated, (req, res) => {
 
   });
 });
+
+///////////////////////////
+// TRADE ROUTING SECTION
+
+// this route handles both cancelling outgoing requests and rejecting incoming requests
+router.post('/cancelrequest', checkAuthenticated, (req, res) => {
+  const title = req.body.title;
+  Book.findOne({ title }, (err, book) => {
+    if (err) throw err;
+
+    if (!book) {
+      res.json({ error: 'Book not found'});
+    } else {
+      // reset fields pertaining to pending trade
+      book.tradePending = false;
+      book.tradeRequestedBy = '';
+      book.save((err) => {
+        if (err) throw err;
+        res.json({ message: 'Request canceled' });
+      });
+    }
+  });
+});
+
+router.post('/accepttrade', checkAuthenticated, (req, res) => {
+  const title = req.body.title;
+  Book.findOne({ title }, (err, book) => {
+    if (err) throw err;
+
+    if (!book) {
+      res.json({ error: 'Book not found' });
+    } else {
+      const newOwner = book.tradeRequestedBy;
+      // reset fields pertaining to pending trade
+      book.tradePending = false;
+      book.tradeRequestedBy = '';
+
+      // update bookOwnership
+      book.owner = newOwner;
+      book.save((err) => {
+        if (err) throw err;
+        res.json({ message: 'Trade accepted' });
+      });
+    }
+  });
+});
+
+///////////////////////////
+// END TRADE ROUTING SECTION
 
 router.get('/checkauthstatus', (req, res) => {
   if (req.isAuthenticated()) {

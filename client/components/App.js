@@ -56,7 +56,6 @@ class App extends Component {
   }
 
   logOut() {
-    console.log('clicked logout');
     axios.post('/logout')
       .then(() => {
         this.context.router.history.push('/');

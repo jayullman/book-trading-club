@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// TODO: Create button that will display a users pending transactions
+// TODO: Pass in books array from BooksContainer
+
 const TradesPendingBox = (props) => {
   // requests that other users made for the books owned by current user
   const requestsForUser = props.requestsForUser;

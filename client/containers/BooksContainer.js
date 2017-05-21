@@ -1,11 +1,15 @@
-// this module will display either every book in the database, or just the users
-// depending on the route
-
+/**
+ * this module will display either every book in the database, or just the users
+ * depending on the route
+ */
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import TradesPendingBox from '../components/TradesPendingBox';
+import PendingTradeDetails from '../components/PendingTradeDetails';
+
+import tradeApi from '../utils/tradeApi';
 
 import '../styles/booksContainer.css';
 
@@ -14,11 +18,15 @@ class BooksContainer extends Component {
     super(props);
 
     this.state = {
-      allBooks: []
+      allBooks: [],
+      showPendingDetails: false
     };
 
     // this.retrieveAllBooks = this.retrieveAllBooks.bind(this);
     this.requestTrade = this.requestTrade.bind(this);
+    this.toggleViewPendingDetails = this.toggleViewPendingDetails.bind(this);
+    this.cancelRequest = this.cancelRequest.bind(this);
+    this.acceptTrade = this.acceptTrade.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +42,7 @@ class BooksContainer extends Component {
   }
 
   retrieveAllBooks() {
-    const books = axios('/allbooks');
+    const books = axios('/getallbooks');
     // sort alphabetically by title
     books.then(({ data }) => { 
       this.setState({ 
@@ -48,11 +56,26 @@ class BooksContainer extends Component {
         })
       });
     });
-  } 
+  }
+
+  // this method will handle both cancelling requests and rejecting incoming requests
+  cancelRequest(title) {
+    tradeApi.cancelRequest(title)
+      .then((results) => {
+        this.retrieveAllBooks();
+      });
+  }
+
+  // this method will accept a trade initiated by another user and transfer ownership of book
+  acceptTrade(title) {
+    tradeApi.acceptTrade(title)
+      .then((results) => {
+        this.retrieveAllBooks();
+      });
+  }
 
   requestTrade(title) {
-    console.log('clicked');
-    const updateBook = axios.post('/trade', {
+    const updateBook = axios.post('/requesttrade', {
       title
     });
 
@@ -60,6 +83,12 @@ class BooksContainer extends Component {
       console.log(data);
       this.retrieveAllBooks();      
     });
+  }
+
+  // handles when view will show the details of pending trades for the user
+  toggleViewPendingDetails() {
+    const newToggleState = !this.state.showPendingDetails;
+    this.setState({ showPendingDetails: newToggleState });
   }
 
   render() {
@@ -106,13 +135,14 @@ class BooksContainer extends Component {
       // map all of the books for the /allbooks route
       } else {
         mappedBooks = this.state.allBooks.map((book) => {
-          // Display book tiles. Add 'Request Trade' button for books not owned by current user
-          // when in the /allbooks route
+          /** 
+           * Display book tiles. Add 'Request Trade' button for books not owned by 
+           * current user when in the /allbooks route
+           */
           return (
             <div className='book' key={book.title}>
               <img src={book.thumbnail} />
-              {
-                isLoggedIn && (currentUser !== book.owner)
+              {isLoggedIn && (currentUser !== book.owner)
                 && <button 
                   // disables onClick handler when trade is pending
                   onClick={book.tradePending === false 
@@ -126,8 +156,10 @@ class BooksContainer extends Component {
                     : 'request-trade-btn'
                   }
                 >
-                {/* change text of button when trade is pending
-                prevent 'request trade' button from showing up on user's owned books*/ }
+                {/** 
+                  * change text of button when trade is pending prevent 
+                  * 'request trade' button from showing up on user's owned books
+                  */}
                   {book.tradePending === true ? 'Trade Pending' : 'Request Trade'}
                 </button>
               }
@@ -140,18 +172,30 @@ class BooksContainer extends Component {
     return (
       <div>
         {/* Display the trade pending box if user is logged in */}
-        {
-          isLoggedIn &&
+        {isLoggedIn &&
           <TradesPendingBox 
             requestsForUser={requestsForUser}
             requestsByUser={requestsByUser}
           />
         }
-        {
-          this.state.allBooks.length === 0
+        {isLoggedIn && (requestsForUser > 0 || requestsByUser > 0) &&
+          <button 
+            onClick={this.toggleViewPendingDetails}
+          >
+          {!this.state.showPendingDetails ? 'View Pending Details' : 'Hide Pending Details'}
+          </button>
+        }
+        {this.state.showPendingDetails 
+         && <PendingTradeDetails 
+          allBooks={this.state.allBooks} 
+          currentUser={currentUser}
+          cancelRequest={this.cancelRequest}
+          acceptTrade={this.acceptTrade}
+         />
+        }
+        {this.state.allBooks.length === 0
             ? <i className="fa fa-spinner" aria-hidden="true"></i>
             : <div className='books-container'>{mappedBooks}</div>
-
         }
       </div>
     );

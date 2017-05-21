@@ -1,10 +1,12 @@
-/* 
-  This module contains the Page component as well as the components that will
-  render the profile information section and the update profile and password forms.
-  The UserSettingsPage component will contain the user information and pass down as
-  props to the other components.
-*/
+// TODO: delete fields when updating profile
+// TODO: add the email to the heading 'Profile Information fo {user's email}
 
+/** 
+ * This module contains the Page component as well as the components that will
+ * render the profile information section and the update profile and password forms.
+ * The UserSettingsPage component will contain the user information and pass down as
+ * props to the other components.
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -119,7 +121,7 @@ class UpdatePasswordForm extends Component {
   }
 
   render() {
-    const { currentPasswordField, newPasswordField, message } = this.state;
+    const { currentPasswordField, newPasswordField } = this.state;
     return (
       <div>
         <h2>Update Password</h2>
