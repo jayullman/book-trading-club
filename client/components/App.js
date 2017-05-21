@@ -7,6 +7,7 @@ import HomePage from '../components/HomePage';
 import LoginPage from '../containers/LoginPage';
 import SignupPage from '../containers/SignupPage';
 import BooksContainer from '../containers/BooksContainer';
+import UserSettingsPage from '../containers/UserSettingsPage';
 import Nav from '../components/Nav';
 import Header from '../components/Header';
 
@@ -83,6 +84,12 @@ class App extends Component {
         {...props}
       />;
 
+    const Settings = props =>
+      <UserSettingsPage
+        currentUser={this.state.currentUser}
+        {...props}
+      />;
+
     return (
       <div>
         <Nav 
@@ -96,6 +103,7 @@ class App extends Component {
           <Route path='/signup' component={SignupPage} />
           <Route path='/allbooks' render={AllBooks} />
           <Route path='/mybooks' render={MyBooks} />
+          <Route path='/settings' render={Settings} />
         </Switch>
       </div>
     );

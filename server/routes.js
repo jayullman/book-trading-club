@@ -68,6 +68,84 @@ router.post('/signup', (req, res) => {
   });
 });
 
+// returns user profile information as json
+router.post('/userprofileinfo', checkAuthenticated, (req, res) => {
+  const email = req.body.email;
+
+  User.findOne({ email }, (err, user) => {
+    if (err) throw err;
+
+    if (user) {
+      res.json({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        city: user.city,
+        state: user.state
+      });
+    } else {
+      res.json({ error: 'User not found'});
+    }
+  });  
+});
+
+router.post('/updateuserprofileinfo', checkAuthenticated, (req, res) => {
+  const { firstName, lastName, city, state } = req.body;
+  const email = req.user.email;
+
+  User.findOne({ email }, (err, user) => {
+    if (err) throw err;
+
+    if (user) {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.city = city;
+      user.state = state;
+
+      user.save((err, updatedUser) => {
+        if (err) throw err;
+
+        // send updated user in json if successfull
+        res.json(updatedUser);
+      });
+    } else {
+      res.json({ error: 'User not found' });
+    }
+  });
+});
+
+// this route will check to see if the current password matches the password
+// in the database and will update to new password 
+router.post('/updatepassword', checkAuthenticated, (req, res) => {
+  const email = req.user.email;
+  const currentPassword = req.body.currentPassword;
+  const newPassword = req.body.newPassword;
+
+  User.findOne({ email }, (err, user) => {
+    if (err) throw err;
+    
+    if (user) {
+      // compare the users given current password with what is stored in the database
+      if (bcrypt.compareSync(currentPassword, user.password)) {
+        // create new password hash and update password in user's record
+        const hash = bcrypt.hashSync(newPassword);
+
+        user.password = hash;
+        user.save((err, updatedUser) => {
+          if (err) throw err;
+
+          // send updated user in json if successfull
+          res.json(updatedUser);
+        });
+      // if currentPassword does not match stored password in database
+      } else {
+        res.json({ error: 'Password is incorrect' });
+      }
+    } else {
+      res.json({ error: 'User not found' });
+    }
+  });
+});
+
 router.post('/addBook', checkAuthenticated, (req, res) => {
   const title = req.body.title;
   const thumbnail = req.body.thumbnail;
@@ -162,6 +240,5 @@ router.get('/checkauthstatus', (req, res) => {
 router.get('/*', (req, res) => {
   res.redirect('/');
 });
-
 
 module.exports = router;
