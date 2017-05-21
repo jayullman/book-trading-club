@@ -75,7 +75,9 @@ class LoginPage extends Component {
             Log in
         </button>
         </form>
-        
+        <div className='message-display'>
+          {this.state.message}
+        </div>
       </div>
       
     );
