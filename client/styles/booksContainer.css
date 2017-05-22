@@ -1,10 +1,7 @@
 .books-container {
   display: flex;
   flex-wrap: wrap;
-}
-
-.book {
-  margin: 0 10px 30px 0;
+  justify-content: space-around;
 }
 
 .request-trade-btn {

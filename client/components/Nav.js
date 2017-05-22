@@ -18,7 +18,7 @@ function Nav(props) {
         <NavLink className='allbooks-link' activeClassName='active-nav' to='/allbooks'>All Books</NavLink>
         {props.isLoggedIn === false 
           ? <NavLink className='login-link' activeClassName='active-nav' to='/login'>Log in</NavLink>
-          : <a className='logout-link' activeClassName='active-nav' onClick={props.logOut}>Log out</a>
+          : <NavLink className='logout-link' activeClassName='active-nav' to='' onClick={props.logOut}>Log out</NavLink>
         }
         {props.isLoggedIn === true
           && <NavLink className='settings-link' activeClassName='active-nav' to='/settings'>Settings</NavLink>

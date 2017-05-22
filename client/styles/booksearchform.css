@@ -1,0 +1,11 @@
+.findbook-form {
+  margin-bottom: 20px;
+}
+
+.findbook-form input {
+  margin-right: 10px;
+}
+
+.addbook-btn {
+  display: block;
+}

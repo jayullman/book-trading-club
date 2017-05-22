@@ -1,47 +1,100 @@
-* {
+/** {
   box-sizing: border-box;
 }
 
 *:before,
 *:after {
   box-sizing: border-box;
-}
+}*/
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   height: 100%;
-  position: relative;
 }
 
-/* containing div located in App.js */
-.main-container {
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* use flex box to make sticky footer */
+.app-container {
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+  flex-direction: column;
   min-height: 100vh;
-  overflow: hidden;
-  display: block;
-  position: relative;
-  /* height of footer */
-  padding-bottom: 150px;
+}
+
+.content {
+  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 1;           /* IE 10 */
+  flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
 }
 
 body {
   font-family: -apple-system,
     BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 
     'Helvetica Neue', sans-serif;
-  padding-bottom: 200px;
 }
 
 button {
+  text-align: center;
   border: 0;
+  border-radius: 5px;
+  outline: 0;
   background: none;
   margin: 0 auto;
   padding: 10px;
-  border: 1px solid #555;
+  border: none;
+  color: #e2e2e2;
+  background: #565656;
   cursor: pointer;
 }
 
 .btn-inactive {
-  background: #777;  
+  color: #777;
+  background: #fff;  
   cursor: default;
+  border: 1px solid #777;
+  border-radius: 5px;
+}
+
+button:hover:enabled {
+  background: linear-gradient(#777, #1a1a1a);
+  color: #fff;
+  text-decoration: none;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.btn-inactive:active {
+  transform: translateY(0);
+}
+
+button.btn-inactive:hover {
+  background: #fff;
+  color: #777;
+}
+
+/* text area that displays error messages and server messages */
+.message-display {
+  margin-top: 10px;
+  color: #d83636;
+  font-size: .8em;
+}
+
+/* div containing book */
+.book {
+  margin: 0 20px;
+  height: 220px;
+}
+
+.book img {
+  height: 160px;
+  width: 100px;
 }

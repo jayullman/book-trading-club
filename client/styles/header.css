@@ -4,6 +4,7 @@ header {
   height: 100px;
   text-align: center;
   position: relative;
+  margin-bottom: 20px;
 }
 
 header h1 {

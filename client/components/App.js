@@ -55,7 +55,8 @@ class App extends Component {
     });
   }
 
-  logOut() {
+  logOut(event) {
+    event.preventDefault();
     axios.post('/logout')
       .then(() => {
         this.context.router.history.push('/');
@@ -90,21 +91,23 @@ class App extends Component {
       />;
 
     return (
-      <div className='main-container'>
-        <Nav 
-          isLoggedIn={this.state.isLoggedIn}
-          logOut={this.logOut.bind(this)}
-        />
-        <Header />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/login' component={LoginPage} />
-          <Route path='/signup' component={SignupPage} />
-          <Route path='/allbooks' render={AllBooks} />
-          <Route path='/mybooks' render={MyBooks} />
-          <Route path='/settings' render={Settings} />
-          <Route render={() => <p>Page not found</p>} />
-        </Switch>
+      <div className='app-container'>
+        <div className='content'>
+          <Nav 
+            isLoggedIn={this.state.isLoggedIn}
+            logOut={this.logOut.bind(this)}
+          />
+          <Header />
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/login' component={LoginPage} />
+            <Route path='/signup' component={SignupPage} />
+            <Route path='/allbooks' render={AllBooks} />
+            <Route path='/mybooks' render={MyBooks} />
+            <Route path='/settings' render={Settings} />
+            <Route render={() => <p>Page not found</p>} />
+          </Switch>
+        </div>
         <Footer />
       </div>
     );
