@@ -10,8 +10,8 @@ import BooksContainer from '../containers/BooksContainer';
 import UserSettingsPage from '../containers/UserSettingsPage';
 import Nav from '../components/Nav';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-import '../styles/normalize.css';
 import '../styles/app.css';
 
 class App extends Component {
@@ -90,7 +90,7 @@ class App extends Component {
       />;
 
     return (
-      <div>
+      <div className='main-container'>
         <Nav 
           isLoggedIn={this.state.isLoggedIn}
           logOut={this.logOut.bind(this)}
@@ -103,7 +103,9 @@ class App extends Component {
           <Route path='/allbooks' render={AllBooks} />
           <Route path='/mybooks' render={MyBooks} />
           <Route path='/settings' render={Settings} />
+          <Route render={() => <p>Page not found</p>} />
         </Switch>
+        <Footer />
       </div>
     );
   } 
