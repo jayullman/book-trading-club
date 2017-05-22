@@ -1,0 +1,28 @@
+footer {
+  height: 150px;
+  background: #004589;
+  color: #fff;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.icons-container a {
+		margin: 0 10px;
+		position: relative;
+		transition: all .2s ease-in;
+		text-decoration: none;
+		border: 0;
+}
+
+.icons-container a,
+.icons-container a:visited {
+  color: #fff;
+}
+
+.no-touchevents .icons-container a:hover {
+	top: 3px;
+}
