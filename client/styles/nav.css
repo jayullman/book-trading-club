@@ -1,0 +1,50 @@
+/* TODO: add vendor prefixes for flex */
+nav {
+  margin: 10px 0;
+}
+.navbar {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.navbar a {
+  display: block;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.active-nav {
+  font-weight: bold;
+  color: red;
+}
+
+a.home-link {
+  align-self: flex-end;
+  order: 10;
+  margin-right: auto;
+  margin-left: 20px;
+}
+
+a.login-link {
+  order: 0;
+}
+
+a.signup-link {
+  order: 1;
+}
+a.logout-link {
+  order: -1;
+}
+
+a.settings-link {
+  order: 0;
+}
+
+a.allbooks-link {
+  order: 2;
+}
+
+a.mybooks-link {
+  order: 3;
+}

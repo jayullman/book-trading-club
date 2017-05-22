@@ -1,27 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import '../styles/nav.css'
 
 function Nav(props) {
   return (
     <nav>
-      <ul>
+      <div className='navbar'>
         {props.isLoggedIn === false
-          && <Link to='/signup'>Sign up</Link>
+          && <NavLink activeClassName='active-nav' className='signup-link' to='/signup'>Sign up</NavLink>
         }
-        <Link to='/'>Home</Link>
+        <NavLink exact activeClassName='active-nav' className='home-link' to='/'>Home</NavLink>
         {props.isLoggedIn === true
-          && <Link to='/mybooks'>My Books</Link>
+          && <NavLink className='mybooks-link' activeClassName='active-nav' to='/mybooks'>My Books</NavLink>
         }
-        <Link to='/allbooks'>All Books</Link>
+        <NavLink className='allbooks-link' activeClassName='active-nav' to='/allbooks'>All Books</NavLink>
         {props.isLoggedIn === false 
-          ? <Link to='/login'>Log in</Link>
-          : <a onClick={props.logOut}>Log out</a>
+          ? <NavLink className='login-link' activeClassName='active-nav' to='/login'>Log in</NavLink>
+          : <a className='logout-link' activeClassName='active-nav' onClick={props.logOut}>Log out</a>
         }
         {props.isLoggedIn === true
-          && <Link to='/settings'>Settings</Link>
+          && <NavLink className='settings-link' activeClassName='active-nav' to='/settings'>Settings</NavLink>
         }
-      </ul>
+      </div>
     </nav>
   );
 }
