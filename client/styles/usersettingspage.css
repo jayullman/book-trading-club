@@ -1,0 +1,22 @@
+.user-settings-page > div {
+  padding: 20px 0;
+}
+
+.profile-info-container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.profile-fields-left,
+.profile-fields-right {
+  display: inline-block;
+  min-width: 100px;
+  margin: 0 5px 20px 5px;
+}
+
+.profile-fields-left {
+  text-align: right;
+}
+.profile-fields-right {
+  text-align: left;
+}

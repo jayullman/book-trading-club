@@ -56,20 +56,30 @@ class SignupPage extends Component {
   render() {
     return (
       <div>
-        sign up
-        <form onSubmit={this.handleSignup}>
-          <input
-            type='email'
-            value={this.state.emailText}
-            name='email'
-            onChange={this.handleInputChange}
-          />
-          <input
-            type='password'
-            value={this.state.passwordText}
-            name='password'
-            onChange={this.handleInputChange}
-          />
+        <h2>Sign Up</h2>
+        <form className='column' onSubmit={this.handleSignup}>
+          <label htmlFor='signup-email'>
+            Email
+            <input
+              id='signup-email'
+              type='email'
+              value={this.state.emailText}
+              name='email'
+              onChange={this.handleInputChange}
+              placeholder='email address'
+            />
+          </label>
+          <label htmlFor='signup-password'>
+            Password
+            <input
+              id='signup-password'          
+              type='password'
+              value={this.state.passwordText}
+              name='password'
+              onChange={this.handleInputChange}
+              placeholder='password'            
+            />
+          </label>
           <button
           >
             Sign up

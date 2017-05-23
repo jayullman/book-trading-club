@@ -16,6 +16,10 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  min-width: 280px;
+  font-family: -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 
+    'Helvetica Neue', sans-serif;
 }
 
 /* use flex box to make sticky footer */
@@ -34,10 +38,30 @@ body {
   flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
 }
 
-body {
-  font-family: -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 
-    'Helvetica Neue', sans-serif;
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  width: 180px;
+  margin: 0 auto;
+}
+form label,
+form input {
+  display: block;
+  /*margin: 0 auto;*/
+  text-align: left;
+}
+
+form input {
+  font-size: 16px;
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+  height: 25px;
+  border: 1px solid #777;
+  border-radius: 3px;
 }
 
 button {
@@ -52,6 +76,7 @@ button {
   color: #e2e2e2;
   background: #565656;
   cursor: pointer;
+  width: 100px;
 }
 
 .btn-inactive {

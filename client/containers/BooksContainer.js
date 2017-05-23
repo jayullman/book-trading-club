@@ -170,7 +170,7 @@ class BooksContainer extends Component {
     }
 
     return (
-      <div>
+      <div className='books-container-page'>
         {/* Display the trade pending box if user is logged in */}
         {isLoggedIn &&
           <TradesPendingBox 
@@ -180,6 +180,7 @@ class BooksContainer extends Component {
         }
         {isLoggedIn && (requestsForUser > 0 || requestsByUser > 0) &&
           <button 
+            className='view-details-button'
             onClick={this.toggleViewPendingDetails}
           >
           {!this.state.showPendingDetails ? 'View Pending Details' : 'Hide Pending Details'}

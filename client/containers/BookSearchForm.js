@@ -1,4 +1,4 @@
-// TODO: Handle case when user tries to submit a blank form
+// TODO: Show loading after searching for a book
 
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -64,13 +64,17 @@ class BookSearchForm extends Component {
   render() {
     return (
       <div>
-        <h3>Find a book to add to your collection</h3>
-        <form className='findbook-form' onSubmit={this.findBook}>
-          <input 
-            type='text'
-            value={this.state.term}
-            onChange={this.handleChange}
-          />
+        <h4>Find a book to add to your collection</h4>
+        <form className='column' className='findbook-form' onSubmit={this.findBook}>
+          <label htmlFor='book-search'>
+            Search by book title
+            <input 
+              type='text'
+              value={this.state.term}
+              onChange={this.handleChange}
+              placeholder='book title'
+            />
+          </label>
           
           <button>Find Book</button>
         </form>

@@ -12,9 +12,10 @@ nav {
   margin-right: 20px;
   text-decoration: none;
   font-weight: normal;
+  color: #333;
 }
 
-.active-nav {
+a.active-nav {
   font-weight: bold;
   color: #d83636;
 }

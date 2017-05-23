@@ -12,6 +12,8 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
+import '../styles/usersettingspage.css'
+
 // this component will display the user's profile information
 const UserProfile = (props) => {
   const {
@@ -22,19 +24,35 @@ const UserProfile = (props) => {
   } = props;
 
   return (
-    <div>
-      <h2>Profile Information</h2>
-      <div>
-        First Name: {firstName}
+    <div className='profile-info-container'>
+      <h3>Profile Information</h3>
+      <div className='profile-fields-left'>
+        <div>
+          First Name:
+        </div>
+        <div>
+          Last Name:
+        </div>
+        <div>
+          City:
+        </div>
+        <div>
+          State:
+        </div>
       </div>
-      <div>
-        Last Name: {lastName}
-      </div>
-      <div>
-        City: {city}
-      </div>
-      <div>
-        State: {state}
+      <div className='profile-fields-right'>
+        <div>
+          {firstName}
+        </div>
+        <div>
+          {lastName}
+        </div>
+        <div>
+          {city}
+        </div>
+        <div>
+          {state}
+        </div>
       </div>
     </div>
   );
@@ -74,16 +92,24 @@ class UpdateProfileForm extends Component {
     const { firstNameField, lastNameField, cityField, stateField } = this.state;
     return (
       <div>
-        <h2>Update Profile Information</h2>
-        <form>
-          Update First Name
-        <input name='firstNameField' value={firstNameField} type='text' onChange={this.handleChange} />
-          Update Last Name
-        <input name='lastNameField' value={lastNameField} type='text' onChange={this.handleChange} />
-          Update City
-        <input name='cityField' value={cityField} type='text' onChange={this.handleChange} />
-          Update State
-        <input name='stateField' value={stateField} type='text' onChange={this.handleChange} />
+        <h3>Update Profile Information</h3>
+        <form className='column'>
+          <label htmlFor='firstNameField'>
+            First Name
+            <input id='firstNameField' name='firstNameField' value={firstNameField} type='text' onChange={this.handleChange} />
+          </label>
+          <label htmlFor='lastNameField'>
+            Last Name
+            <input id='lastNameField' name='lastNameField' value={lastNameField} type='text' onChange={this.handleChange} />
+          </label>
+          <label htmlFor='cityField'>
+            City
+            <input id='cityField' name='cityField' value={cityField} type='text' onChange={this.handleChange} />
+          </label>
+          <label htmlFor='stateField'>
+            State
+            <input id='stateField' name='stateField' value={stateField} type='text' onChange={this.handleChange} />
+          </label>
         </form>
         <button 
           onClick={this.props.updateProfile.bind(
@@ -124,12 +150,16 @@ class UpdatePasswordForm extends Component {
     const { currentPasswordField, newPasswordField } = this.state;
     return (
       <div>
-        <h2>Update Password</h2>
-        <form>
-          Current Password
-        <input name='currentPasswordField' value={currentPasswordField} type='password' onChange={this.handleChange} />
-          Update Last Name
-        <input name='newPasswordField' value={newPasswordField} type='password' onChange={this.handleChange} />
+        <h3>Update Password</h3>
+        <form className='column'>
+          <label htmlFor='currentPasswordField'>
+            Current Password
+            <input id='currentPasswordField' name='currentPasswordField' value={currentPasswordField} type='password' onChange={this.handleChange} />
+          </label>
+          <label htmlFor='newPasswordField'>
+            New Password
+            <input id='newPasswordField' name='newPasswordField' value={newPasswordField} type='password' onChange={this.handleChange} />
+          </label>
         </form>
         <button
           onClick={this.props.updatePassword.bind(
@@ -228,16 +258,19 @@ class UserSettingsPage extends Component {
   render() {
     const { firstName, lastName, city, state } = this.state;
     return (
-      <div>
+      <div className='user-settings-page'>
+        <h2>Settings Page for {this.props.currentUser}</h2>
         <UserProfile
           firstName={firstName}
           lastName={lastName}
           city={city}
           state={state}
         />
+        <hr />
         <UpdateProfileForm
           updateProfile={this.updateProfile}
         />
+        <hr />        
         <UpdatePasswordForm
           updatePassword={this.updatePassword}
           message={this.state.passwordAreaMessage}

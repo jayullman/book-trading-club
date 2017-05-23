@@ -56,20 +56,30 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        log in
-        <form onSubmit={this.handleLogin}>
-          <input
-            type='email'
-            value={this.state.emailText}
-            name='email'
-            onChange={this.handleInputChange}
-          />
-          <input
-            type='password'
-            value={this.state.passwordText}
-            name='password'
-            onChange={this.handleInputChange}
-          />
+        <h2>Log In</h2>
+        <form className='column' onSubmit={this.handleLogin}>
+          <label htmlFor='login-email'>
+            Email
+            <input
+              id='login-email'
+              type='email'
+              value={this.state.emailText}
+              name='email'
+              onChange={this.handleInputChange}
+              placeholder='email address'
+            />
+          </label>
+          <label htmlFor='login-password'>
+            Password
+            <input
+              id='login-password'
+              type='password'
+              value={this.state.passwordText}
+              name='password'
+              onChange={this.handleInputChange}
+              placeholder='password'            
+            />
+          </label>
           <button
           >
             Log in
@@ -79,7 +89,6 @@ class LoginPage extends Component {
           {this.state.message}
         </div>
       </div>
-      
     );
   }
 }

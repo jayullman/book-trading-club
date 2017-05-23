@@ -7,3 +7,7 @@
 .request-trade-btn {
   display: block;
 }
+
+.view-details-button {
+  width: auto;
+}
