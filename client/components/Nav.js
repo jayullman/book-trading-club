@@ -27,20 +27,18 @@ class Nav extends Component {
       <div className='nav-container'>
         <nav className='navbar'>
           {this.props.isLoggedIn === false
-            && <NavLink activeClassName='active-nav' className='signup-link' to='/signup'>Sign up</NavLink>
-          }
+            && <NavLink activeClassName='active-nav' className='signup-link' to='/signup'>Sign up</NavLink>}
           <NavLink exact activeClassName='active-nav' className='home-link' to='/'>Home</NavLink>
           {this.props.isLoggedIn === true
-            && <NavLink className='mybooks-link' activeClassName='active-nav' to='/mybooks'>My Books</NavLink>
-          }
+            && <NavLink className='mybooks-link' activeClassName='active-nav' to='/mybooks'>My Books</NavLink>}
           <NavLink className='allbooks-link' activeClassName='active-nav' to='/allbooks'>All Books</NavLink>
           {this.props.isLoggedIn === false
             ? <NavLink className='login-link' activeClassName='active-nav' to='/login'>Log in</NavLink>
-            : <NavLink className='logout-link' to='' onClick={this.props.logOut}>Log out</NavLink>
-          }
+            : <NavLink className='logout-link' to='' onClick={this.props.logOut}>Log out</NavLink>}
           {this.props.isLoggedIn === true
-            && <NavLink className='settings-link' activeClassName='active-nav' to='/settings'>Settings</NavLink>
-          }
+            && <NavLink className='settings-link' activeClassName='active-nav' to='/settings'>Settings</NavLink>}
+          {this.props.isLoggedIn === true 
+            && <NavLink className='addbooks-link' activeClassName='active-nav' to='/addbooks'>Add Books</NavLink>}
         </nav>
 
         {/* Burger Menu Rendering when screen is narrow */}
@@ -48,20 +46,18 @@ class Nav extends Component {
           <Menu width={200} isOpen={this.state.isMenuOpen}>
             <NavLink exact activeClassName='active-nav' className='home-link' to='/'>Home</NavLink>
             {this.props.isLoggedIn === false
-              && <NavLink activeClassName='active-nav' className='signup-link' to='/signup'>Sign up</NavLink>
-            }
+              && <NavLink activeClassName='active-nav' className='signup-link' to='/signup'>Sign up</NavLink>}
             {this.props.isLoggedIn === false
               ? <NavLink className='login-link' activeClassName='active-nav' to='/login'>Log in</NavLink>
-              : <NavLink className='logout-link' to='' onClick={this.props.logOut}>Log out</NavLink>
-            }
+              : <NavLink className='logout-link' to='' onClick={this.props.logOut}>Log out</NavLink>}
             {this.props.isLoggedIn === true
-              && <NavLink className='settings-link' activeClassName='active-nav' to='/settings'>Settings</NavLink>
-            }
+              && <NavLink className='settings-link' activeClassName='active-nav' to='/settings'>Settings</NavLink>}
           </Menu>
+          {this.props.isLoggedIn === true
+            && <NavLink className='addbooks-link' activeClassName='active-nav' to='/addbooks'>Add Books</NavLink>}
           <NavLink className='allbooks-link' activeClassName='active-nav' to='/allbooks'>All Books</NavLink>
           {this.props.isLoggedIn === true
-            && <NavLink className='mybooks-link' activeClassName='active-nav' to='/mybooks'>My Books</NavLink>
-          }
+            && <NavLink className='mybooks-link' activeClassName='active-nav' to='/mybooks'>My Books</NavLink>}
       </nav>
     </div>
     );

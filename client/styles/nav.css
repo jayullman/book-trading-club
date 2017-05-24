@@ -50,3 +50,7 @@ a.allbooks-link {
 a.mybooks-link {
   order: 3;
 }
+
+a.addbooks-link {
+  order: 4;
+}

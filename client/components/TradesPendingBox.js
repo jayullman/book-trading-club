@@ -11,7 +11,7 @@ const TradesPendingBox = (props) => {
   const requestsByUser = props.requestsByUser;
 
   return (
-    <div>
+    <div className='trades-pending-box'>
       <div>
         Trades You Requested: {requestsByUser}
       </div>

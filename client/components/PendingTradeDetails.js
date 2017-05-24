@@ -11,33 +11,39 @@ const BookList = ({ books, filter, cancelRequest, acceptTrade }) => {
   console.log(cancelRequest);
 
   return (
-    <ul>
-      {filteredBooks.map(book => 
-        <li 
-          key={book.title}
-        >
-          {book.title}
-          {/** 
+    <div className='pending-trade-list-container'>
+      <ul className='pending-trade-list'>
+        {filteredBooks.map(book =>
+          <li
+            key={book.title}
+          >
+            {book.title}
+            {/** 
             * If the acceptTrade function is  null, 
             * it means the list is for user initiated requests 
             */}
-          {!acceptTrade 
-            ? <span onClick={cancelRequest.bind(null, book.title)}>cancel request</span>
-            : <div>
-                <span 
-                  onClick={acceptTrade.bind(null, book.title)}
-                >
-                  Accept
+            {!acceptTrade
+              ? <span 
+                  className='cancel-trade' 
+                  onClick={cancelRequest.bind(null, book.title)}>
+                    Cancel
                 </span>
-                <span 
-                  onClick={acceptTrade.bind(null, book.title)}
-                >
-                  Reject
+              : <div className='accept-reject-trade-container'>
+                <span
+                  className='accept-trade' 
+                  onClick={acceptTrade.bind(null, book.title)}>
+                    Accept
+                </span>
+                <span
+                  className='reject-trade'                 
+                  onClick={cancelRequest.bind(null, book.title)}>
+                    Reject
                 </span>
               </div>
-          }
-        </li>)}
-    </ul>
+            }
+          </li>)}
+      </ul>
+    </div>
   );
 };
 

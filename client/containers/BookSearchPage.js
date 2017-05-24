@@ -5,9 +5,9 @@ import axios from 'axios';
 // import npm module for Google Books API
 import * as books from 'google-books-search';
 
-import '../styles/booksearchform.css';
+import '../styles/booksearchpage.css';
 
-class BookSearchForm extends Component {
+class BookSearchPage extends Component {
   constructor(props) {
     super(props);
 
@@ -51,20 +51,24 @@ class BookSearchForm extends Component {
   }
 
   handleAdd() {
+    this.setState({ 
+      message: '',
+      term: '' 
+    });
     const addBook = axios.post('/addBook', {
       thumbnail: this.state.thumbnail,
       title: this.state.foundBookTitle
     });
 
     addBook.then(({ data }) => {
-      console.log(data);
+      this.setState({ message: data.message });
     });
   }
 
   render() {
     return (
       <div>
-        <h4>Find a book to add to your collection</h4>
+        <h3>Find books to add to your collection</h3>
         <form className='column' className='findbook-form' onSubmit={this.findBook}>
           <label htmlFor='book-search'>
             Search by book title
@@ -92,4 +96,4 @@ class BookSearchForm extends Component {
   }
 }
 
-export default BookSearchForm;
+export default BookSearchPage;

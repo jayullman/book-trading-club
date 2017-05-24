@@ -1,7 +1,8 @@
 .books-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .request-trade-btn {
@@ -10,4 +11,50 @@
 
 .view-details-button {
   width: auto;
+}
+
+.trades-pending-box > div {
+  margin-bottom: 15px;  
+}
+
+.pending-trade-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pending-trade-list {
+  list-style-type: none;
+  text-align: left;
+}
+
+.pending-trade-list li {
+  margin-bottom: 7px;
+  font-weight: 300px;
+}
+
+/* styles for buttons next to book title for user to accept, reject, or cancel trades */
+.accept-trade,
+.cancel-trade,
+.reject-trade {
+  font-style: italic;
+  color: #d83636;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: .7em;
+  font-weight: bold;
+}
+
+.accept-trade {
+  color: #3bafcc;
+}
+
+.accept-reject-trade-container {
+  display: inline-block;
+}
+
+.books-section-title {
+  padding-top: 20px;
+  width: 200px;
+  border-bottom: 1px solid #555;
+  margin: 0 auto;
 }

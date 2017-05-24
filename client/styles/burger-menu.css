@@ -15,7 +15,8 @@
 
 /* links outside of sliding menu */
 .burger-menu a.allbooks-link,
-.burger-menu a.mybooks-link {
+.burger-menu a.mybooks-link,
+.burger-menu a.addbooks-link {
   padding: 10px 0;
 }
 
@@ -71,7 +72,7 @@
   background: rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 460px) {
+@media (max-width: 560px) {
   .burger-menu {
     display: block;
   }
@@ -82,12 +83,13 @@
     margin-top: 38px !important;
   }
   .allbooks-link,
-  .mybooks-link {
+  .mybooks-link,
+  .addbooks-link {
     float: right;
   }
 }
 
-@media (min-width: 461px) {
+@media (min-width: 561px) {
   .burger-menu {
     display: none;
   }

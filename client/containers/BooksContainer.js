@@ -2,6 +2,11 @@
  * this module will display either every book in the database, or just the users
  * depending on the route
  */
+
+/** 
+ * TODO: create cancelable promise for when component unmounts but 
+ * component is still waiting for AJAX response
+ */
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -30,6 +35,7 @@ class BooksContainer extends Component {
   }
 
   componentDidMount() {
+    this.setState({ _isMounted: true })
     // retreive all books when component mounts
     this.retrieveAllBooks();
   }
@@ -44,14 +50,14 @@ class BooksContainer extends Component {
   retrieveAllBooks() {
     const books = axios('/getallbooks');
     // sort alphabetically by title
-    books.then(({ data }) => { 
-      this.setState({ 
+    books.then(({ data }) => {
+      this.setState({
         allBooks: data.books.sort((a, b) => {
           if (a.title.toLowerCase() < b.title.toLowerCase()) {
             return -1;
           } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
             return 1;
-          } 
+          }
           return 0;
         })
       });
@@ -194,9 +200,14 @@ class BooksContainer extends Component {
           acceptTrade={this.acceptTrade}
          />
         }
+        {url === '/allbooks'
+          ? <h3 className='books-section-title'>All Books</h3>
+          : <h3 className='books-section-title'>Your Books</h3>}
         {this.state.allBooks.length === 0
             ? <i className="fa fa-spinner" aria-hidden="true"></i>
-            : <div className='books-container'>{mappedBooks}</div>
+            : <div className='books-container'>
+                {mappedBooks}
+              </div>
         }
       </div>
     );

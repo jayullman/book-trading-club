@@ -1,6 +1,5 @@
 import React from 'react';
 
-import BookSearchForm from '../containers/BookSearchForm';
 import '../styles/homepage.css';
 
 const HomePage = () => (
@@ -9,7 +8,6 @@ const HomePage = () => (
     <p>
       Blurb about app goes here
     </p>
-    <BookSearchForm />
   </div>
 );
 

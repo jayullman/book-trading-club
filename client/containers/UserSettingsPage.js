@@ -202,7 +202,6 @@ class UserSettingsPage extends Component {
     });
 
     userInfo.then(({ data }) => {
-      console.log(data);
       this.setState({
         firstName: data.firstName,
         lastName: data.lastName,
