@@ -1,0 +1,18 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.home-page p {
+  font-weight: 300px;
+  max-width: 600px;
+  width: 80%;
+  margin: 20px auto;
+  line-height: 1.3;
+}
+
+.home-page a {
+  color: #d83636;
+  text-decoration: none;
+}
