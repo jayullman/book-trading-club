@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-import '../styles/usersettingspage.css'
+import '../styles/usersettingspage.css';
 
 // this component will display the user's profile information
 const UserProfile = (props) => {

@@ -15,8 +15,6 @@ import Footer from '../components/Footer';
 
 import '../styles/app.css';
 
-// TODO: add alt props to img tags
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +22,7 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       currentUser: ''
-    }
+    };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
     this.checkAuthStatus = this.checkAuthStatus.bind(this);
@@ -51,10 +49,10 @@ class App extends Component {
   }
 
   getCurrentUser() {
-    const user = axios('/currentuser')
+    const user = axios('/currentuser');
 
     user.then(({ data }) => {
-      this.setState({ currentUser: data.currentUserEmail })
+      this.setState({ currentUser: data.currentUserEmail });
     });
   }
 
@@ -120,6 +118,6 @@ class App extends Component {
   
 App.contextTypes = {
   router: PropTypes.object
-}
+};
 
 export default App;

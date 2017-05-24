@@ -35,7 +35,6 @@ class BooksContainer extends Component {
   }
 
   componentDidMount() {
-    this.setState({ _isMounted: true })
     // retreive all books when component mounts
     this.retrieveAllBooks();
   }
@@ -67,7 +66,7 @@ class BooksContainer extends Component {
   // this method will handle both cancelling requests and rejecting incoming requests
   cancelRequest(title) {
     tradeApi.cancelRequest(title)
-      .then((results) => {
+      .then(() => {
         this.retrieveAllBooks();
       });
   }
@@ -75,7 +74,7 @@ class BooksContainer extends Component {
   // this method will accept a trade initiated by another user and transfer ownership of book
   acceptTrade(title) {
     tradeApi.acceptTrade(title)
-      .then((results) => {
+      .then(() => {
         this.retrieveAllBooks();
       });
   }
@@ -128,26 +127,24 @@ class BooksContainer extends Component {
 
       // map either all books or just the user's books depending on the route
       if (url === '/mybooks') {
-        mappedBooks = this.state.allBooks.filter((book) => {
-          return book.owner === currentUser;
-        }).map((book) => {
-          return (
+        mappedBooks = this.state.allBooks.filter(book => 
+          book.owner === currentUser
+        ).map(book => 
             <div className='book' key={book.title}>
-              <img src={book.thumbnail} />
+              <img src={book.thumbnail} alt={`thumbnail for ${book.title}`} />
             </div>
-          );
-        });
+        );
 
       // map all of the books for the /allbooks route
       } else {
-        mappedBooks = this.state.allBooks.map((book) => {
+        mappedBooks = this.state.allBooks.map(book => 
           /** 
            * Display book tiles. Add 'Request Trade' button for books not owned by 
            * current user when in the /allbooks route
            */
-          return (
+          
             <div className='book' key={book.title}>
-              <img src={book.thumbnail} />
+              <img src={book.thumbnail} alt={`thumbnail for ${book.title}`} />
               {isLoggedIn && (currentUser !== book.owner)
                 && <button 
                   // disables onClick handler when trade is pending
@@ -171,7 +168,6 @@ class BooksContainer extends Component {
               }
             </div>
           );
-        });
       }
     }
 

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 // import react burger menu module
 import { slide as Menu } from 'react-burger-menu';
 
-import '../styles/burger-menu.css'
-import '../styles/nav.css'
+import '../styles/burger-menu.css';
+import '../styles/nav.css';
 
 class Nav extends Component {
   constructor(props) {

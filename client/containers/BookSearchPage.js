@@ -85,7 +85,7 @@ class BookSearchPage extends Component {
         <div>
           {this.state.thumbnail && 
             <div className='book'>
-              <img src={this.state.thumbnail} />
+              <img src={this.state.thumbnail} alt='thumbnail for search result' />
               <button className='addbook-btn' onClick={this.handleAdd}>Add to your books</button>
             </div>
           }

@@ -95,6 +95,6 @@ class SignupPage extends Component {
 
 SignupPage.contextTypes = {
   router: PropTypes.object
-}
+};
 
 export default SignupPage;

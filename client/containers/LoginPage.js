@@ -95,6 +95,6 @@ class LoginPage extends Component {
 
 LoginPage.contextTypes = {
   router: PropTypes.object
-}
+};
 
 export default LoginPage;

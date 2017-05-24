@@ -2,8 +2,8 @@ import React from 'react';
 
 import '../styles/footer.css';
 
-const Footer = (props) => {
-  return (
+const Footer = () => 
+  (
     <footer>
       <p>
         View the source code on{' '}
@@ -21,6 +21,5 @@ const Footer = (props) => {
       <small>Created by Jay</small>
     </footer>
   );
-};
 
 export default Footer;
