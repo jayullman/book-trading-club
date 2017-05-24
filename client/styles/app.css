@@ -100,10 +100,14 @@ button:hover:enabled {
 }
 
 button:active {
+  -webkit-transform: translateY(1px); 
+  -ms-transform: translateY(1px);
   transform: translateY(1px);
 }
 
 .btn-inactive:active {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
   transform: translateY(0);
 }
 

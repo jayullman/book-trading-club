@@ -3,6 +3,9 @@ nav {
   margin: 0;
 }
 .navbar {
+  display: -webkit-box; 
+  display: -ms-flexbox; 
+  display: -webkit-flex;
   display: flex;
   flex-direction: row-reverse;
   padding: 10px 0;
