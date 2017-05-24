@@ -1,0 +1,102 @@
+/* Position and sizing of burger button */
+.burger-menu {
+  margin-top: 0;
+}
+
+/* links located within sliding menu */
+.burger-menu a.home-link,
+.burger-menu a.signup-link,
+.burger-menu a.login-link,
+.burger-menu a.logout-link,
+.burger-menu a.settings-link {
+  color: #fff !important;
+  margin: 0 0 15px 0 !important;
+}
+
+/* links outside of sliding menu */
+.burger-menu a.allbooks-link,
+.burger-menu a.mybooks-link {
+  padding: 10px 0;
+}
+
+.burger-menu a.settings-link {
+  margin-top: 50px !important;
+}
+
+.bm-burger-button {
+  position: absolute;
+  width: 25px;
+  height: 20px;
+  left: 10px;
+  top: 10px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+  background: #000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 460px) {
+  .burger-menu {
+    display: block;
+  }
+  nav.navbar {
+    display: none;
+  }
+  header h1 {
+    margin-top: 38px !important;
+  }
+  .allbooks-link,
+  .mybooks-link {
+    float: right;
+  }
+}
+
+@media (min-width: 461px) {
+  .burger-menu {
+    display: none;
+  }
+  .bm-burger-button {
+    display: none;
+  }
+  .navbar {
+    display: initial;
+  }
+}
+
+/* End hamburger menu styles */

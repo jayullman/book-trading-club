@@ -10,11 +10,11 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   text-align: center;
   min-width: 280px;
   font-family: -apple-system,
@@ -30,17 +30,23 @@ body {
   display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
   flex-direction: column;
   min-height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 .content {
   -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
   -ms-flex: 1;           /* IE 10 */
   flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+  margin: 0;
+  padding: 0;
 }
 
 .column {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 form label {

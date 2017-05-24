@@ -14,6 +14,8 @@ import Footer from '../components/Footer';
 
 import '../styles/app.css';
 
+// TODO: add alt props to img tags
+
 class App extends Component {
   constructor(props) {
     super(props);

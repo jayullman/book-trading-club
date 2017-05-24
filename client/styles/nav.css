@@ -1,13 +1,14 @@
 /* TODO: add vendor prefixes for flex */
 nav {
-  margin: 10px 0;
+  margin: 0;
 }
 .navbar {
   display: flex;
   flex-direction: row-reverse;
+  padding: 10px 0;
 }
 
-.navbar a {
+.nav-container a {
   display: block;
   margin-right: 20px;
   text-decoration: none;
