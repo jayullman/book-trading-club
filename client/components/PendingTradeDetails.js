@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
  */
 const BookList = ({ books, filter, cancelRequest, acceptTrade }) => {
   const filteredBooks = books.filter(filter);
-  console.log(cancelRequest);
 
   return (
     <div className='pending-trade-list-container'>

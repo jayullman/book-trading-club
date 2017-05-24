@@ -41,7 +41,6 @@ class BookSearchPage extends Component {
       if (err) {
         console.log(err);
       } else {
-        console.log(results);
         this.setState({ 
           thumbnail: results[0].thumbnail,
           foundBookTitle: results[0].title 

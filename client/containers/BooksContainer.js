@@ -84,8 +84,7 @@ class BooksContainer extends Component {
       title
     });
 
-    updateBook.then(({ data }) => {
-      console.log(data);
+    updateBook.then(() => {
       this.retrieveAllBooks();      
     });
   }

@@ -214,7 +214,6 @@ router.post('/requesttrade', checkAuthenticated, (req, res) => {
     if (err) throw err;
 
     if (book) {
-      console.log(book);
       book.tradePending = true;
       book.tradeRequestedBy = userEmail;
 
