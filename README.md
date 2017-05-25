@@ -1,5 +1,5 @@
 # Book Trading Club
-## A fullstack application for freeCodeCamp
+## A full stack application for freeCodeCamp
 
 Live site: https://the-book-club.herokuapp.com/
 
