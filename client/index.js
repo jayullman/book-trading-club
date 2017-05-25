@@ -7,7 +7,7 @@ import './styles/normalize.css';
 // adds classes to touch and non-touch devices for css targeting
 import './modernizr-touch';
 
-import App from './components/App';
+import App from './containers/App';
 
 ReactDOM.render((
   <BrowserRouter>
