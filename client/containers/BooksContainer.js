@@ -193,6 +193,8 @@ class BooksContainer extends Component {
           currentUser={currentUser}
           cancelRequest={this.cancelRequest}
           acceptTrade={this.acceptTrade}
+          requestsForUser={requestsForUser}
+          requestsByUser={requestsByUser}
          />
         }
         {url === '/allbooks'

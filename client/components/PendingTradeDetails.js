@@ -56,27 +56,31 @@ BookList.propTypes = {
 /**
  * This component will render the list to the view
  */
-const PendingTradeDetails = ({ allBooks, currentUser, cancelRequest, acceptTrade }) => {
+const PendingTradeDetails = ({ allBooks, currentUser, cancelRequest, acceptTrade, requestsByUser, requestsForUser }) => {
   // filters all books for books that are pending trade
   const filteredBooks = allBooks.filter(book => book.tradePending);
 
   return (
     <div>
       {/* This list will display all trades the user initiated */}
-        <h2>Your requests</h2>
-        <BookList 
-          books={filteredBooks} 
+        <h3>Your requests</h3>
+        {requestsByUser > 0 
+        ? <BookList
+          books={filteredBooks}
           filter={book => currentUser === book.tradeRequestedBy}
-          cancelRequest={cancelRequest}
-        />
+          cancelRequest={cancelRequest} />
+        : <p>You have no requests awaiting other's approval</p>}
+        
       {/* This list will display all trades awaiting the user's approval */}
-        <h2>Trades awaiting your approval</h2>      
-        <BookList 
-          books={filteredBooks} 
+        <h3>Trades awaiting your approval</h3>
+        {requestsForUser > 0 
+        ? <BookList
+          books={filteredBooks}
           filter={book => (currentUser === book.owner && currentUser !== book.tradeRequestedBy)}
           cancelRequest={cancelRequest}
-          acceptTrade={acceptTrade}           
-        />
+          acceptTrade={acceptTrade} />
+        : <p>You have no requests awating your approval</p>}      
+        
     </div>
   );
 };
@@ -85,7 +89,9 @@ PendingTradeDetails.propTypes = {
   allBooks: PropTypes.array.isRequired,
   currentUser: PropTypes.string.isRequired,
   cancelRequest: PropTypes.func.isRequired,
-  acceptTrade: PropTypes.func.isRequired
+  acceptTrade: PropTypes.func.isRequired,
+  requestsForUser: PropTypes.number.isRequired,
+  requestsByUser: PropTypes.number.isRequired
 };
 
 export default PendingTradeDetails;
