@@ -45,9 +45,9 @@ class LoginPage extends Component {
     } else if (!this.state.passwordText) {
       this.setState({ message: 'You must enter a password' });
       return;
-    } else {
-      this.setState({ message: '' });
-    }
+    } 
+    this.setState({ message: '' });
+    
     const response = axios.post('/login', {
       email: this.state.emailText,
       password: this.state.passwordText

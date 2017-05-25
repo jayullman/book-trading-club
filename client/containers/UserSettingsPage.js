@@ -1,5 +1,3 @@
-// TODO: Saving user profile info results in data rendered in wrong fields
-// TODO: handle case when user tries to update info while not authenticated (401 received);
 /** 
  * This module contains the Page component as well as the components that will
  * render the profile information section and the update profile and password forms.
@@ -73,7 +71,7 @@ class UpdateProfileForm extends Component {
       firstNameField: '',
       lastNameField: '',
       cityField: '',
-      stateField: ''
+      stateField: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -129,13 +127,15 @@ class UpdateProfileForm extends Component {
         >
           Update
         </button>
+        <div className='message-display'>{this.props.message}</div>
       </div>
     ); 
   }
 }
 
 UpdateProfileForm.propTypes = {
-  updateProfile: PropTypes.func.isRequired
+  updateProfile: PropTypes.func.isRequired,
+  message: PropTypes.string
 };
 
 class UpdatePasswordForm extends Component {
@@ -148,6 +148,7 @@ class UpdatePasswordForm extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleUpdatePassword = this.handleUpdatePassword.bind(this);
   }
 
   handleChange(event) {
@@ -155,6 +156,15 @@ class UpdatePasswordForm extends Component {
     const field = event.target.name;
 
     this.setState({ [field]: value });
+  }
+
+  handleUpdatePassword() {
+    const { currentPasswordField, newPasswordField } = this.state;
+    this.setState({
+      currentPasswordField: '',
+      newPasswordField: ''
+    });
+    this.props.updatePassword.call(null, currentPasswordField, newPasswordField);
   }
 
   render() {
@@ -173,13 +183,11 @@ class UpdatePasswordForm extends Component {
           </label>
         </form>
         <button
-          onClick={this.props.updatePassword.bind(
-            null, currentPasswordField, newPasswordField
-          )}
+          onClick={this.handleUpdatePassword}
         >
           Update
         </button>
-        <div>{this.props.message}</div>
+        <div className='message-display'>{this.props.message}</div>
       </div>
     );
   }
@@ -199,7 +207,8 @@ class UserSettingsPage extends Component {
       lastName: '',
       city: '',
       state: '',
-      passwordAreaMessage: ''
+      passwordAreaMessage: '',
+      profileInfoAreaMessage: ''
     };
 
     this.updateProfile = this.updateProfile.bind(this);
@@ -240,6 +249,13 @@ class UserSettingsPage extends Component {
         city: data.city || this.state.city,
         state: data.state || this.state.state
       });
+    }).catch((error) => {
+      console.log(error);
+      if (error.response.status === 401) {
+        this.setState({ 
+          profileInfoAreaMessage: 'Access denied. Try logging in again to update profile information.' 
+        });
+      }
     });
   }
 
@@ -260,9 +276,14 @@ class UserSettingsPage extends Component {
         // display error messages from the server in the message area
         if (data.error) {
           this.setState({ passwordAreaMessage: data.error });
-        }
+        } 
       }).catch((error) => {
         console.log(error);
+        if (error.response.status === 401) {
+          this.setState({ 
+            passwordAreaMessage: 'Access denied. Try logging in again to update password.' 
+          });
+        }
       });
     }
   }
@@ -281,6 +302,7 @@ class UserSettingsPage extends Component {
         <hr />
         <UpdateProfileForm
           updateProfile={this.updateProfile}
+          message={this.state.profileInfoAreaMessage}
         />
         <hr />        
         <UpdatePasswordForm
