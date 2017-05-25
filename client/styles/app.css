@@ -128,6 +128,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  font-weight: 300;
+}
+
 /* div containing book */
 .book {
   margin: 0 20px;
