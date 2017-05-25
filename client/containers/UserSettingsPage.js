@@ -240,7 +240,6 @@ class UserSettingsPage extends Component {
     });
 
     updatedProfile.then(({ data }) => {
-      // TODO: Find out why this isn't running
       console.log(data);
       // only updates state if there is a value in the field
       this.setState({

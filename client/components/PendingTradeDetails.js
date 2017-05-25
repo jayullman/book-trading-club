@@ -56,7 +56,14 @@ BookList.propTypes = {
 /**
  * This component will render the list to the view
  */
-const PendingTradeDetails = ({ allBooks, currentUser, cancelRequest, acceptTrade, requestsByUser, requestsForUser }) => {
+const PendingTradeDetails = ({ 
+  allBooks, 
+  currentUser, 
+  cancelRequest, 
+  acceptTrade, 
+  requestsByUser, 
+  requestsForUser 
+}) => {
   // filters all books for books that are pending trade
   const filteredBooks = allBooks.filter(book => book.tradePending);
 

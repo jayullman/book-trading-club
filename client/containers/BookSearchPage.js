@@ -2,9 +2,11 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+
 // import npm module for Google Books API
 import * as books from 'google-books-search';
 
+import Spinner from '../components/Spinner';
 import '../styles/booksearchpage.css';
 
 class BookSearchPage extends Component {
@@ -15,7 +17,8 @@ class BookSearchPage extends Component {
       term: '',
       thumbnail: '',
       foundBookTitle: '',
-      message: ''
+      message: '',
+      isSearching: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +38,12 @@ class BookSearchPage extends Component {
       this.setState({ message: 'You must enter a search term' });
       return;
     } else if (this.state.term) {
-      this.setState({ message: '' });      
+      this.setState({ 
+        message: '',
+        thumbnail: '',
+        foundBookTitle: '',
+        isSearching: true  
+      });      
     }
     books.search(this.state.term, (err, results) => {
       if (err) {
@@ -43,7 +51,8 @@ class BookSearchPage extends Component {
       } else {
         this.setState({ 
           thumbnail: results[0].thumbnail,
-          foundBookTitle: results[0].title 
+          foundBookTitle: results[0].title,
+          isSearching: false  
         });
       }
     });
@@ -52,7 +61,7 @@ class BookSearchPage extends Component {
   handleAdd() {
     this.setState({ 
       message: '',
-      term: '' 
+      term: ''
     });
     const addBook = axios.post('/addBook', {
       thumbnail: this.state.thumbnail,
@@ -60,7 +69,9 @@ class BookSearchPage extends Component {
     });
 
     addBook.then(({ data }) => {
-      this.setState({ message: data.message });
+      this.setState({ 
+        message: data.message
+      });
     });
   }
 
@@ -81,6 +92,7 @@ class BookSearchPage extends Component {
           
           <button>Find Book</button>
         </form>
+        {this.state.isSearching && <Spinner />}
         <div>
           {this.state.thumbnail && 
             <div className='book'>

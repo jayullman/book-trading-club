@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 
 import TradesPendingBox from '../components/TradesPendingBox';
 import PendingTradeDetails from '../components/PendingTradeDetails';
+import Spinner from '../components/Spinner';
 
 import tradeApi from '../utils/tradeApi';
 
@@ -201,7 +202,7 @@ class BooksContainer extends Component {
           ? <h3 className='books-section-title'>All Books</h3>
           : <h3 className='books-section-title'>Your Books</h3>}
         {this.state.allBooks.length === 0
-            ? <i className="fa fa-spinner" aria-hidden="true"></i>
+            ? <Spinner />
             : <div className='books-container'>
                 {mappedBooks}
               </div>
