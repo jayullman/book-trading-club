@@ -1,6 +1,5 @@
-// TODO: delete fields when updating profile
-// TODO: add the email to the heading 'Profile Information fo {user's email}
-
+// TODO: Saving user profile info results in data rendered in wrong fields
+// TODO: handle case when user tries to update info while not authenticated (401 received);
 /** 
  * This module contains the Page component as well as the components that will
  * render the profile information section and the update profile and password forms.
@@ -28,7 +27,7 @@ const UserProfile = (props) => {
       <h3>Profile Information</h3>
       <div className='profile-fields-left'>
         <div>
-          First Name:
+          First Name: 
         </div>
         <div>
           Last Name:
@@ -41,7 +40,7 @@ const UserProfile = (props) => {
         </div>
       </div>
       <div className='profile-fields-right'>
-        <div>
+        <div className='user-info-field'>
           {firstName}
         </div>
         <div>
@@ -78,6 +77,7 @@ class UpdateProfileForm extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
   }
 
 
@@ -88,8 +88,21 @@ class UpdateProfileForm extends Component {
     this.setState({ [field]: value });
   }
 
-  render() {
+  handleUpdateClick() {
     const { firstNameField, lastNameField, cityField, stateField } = this.state;
+    this.setState({
+      firstNameField: '',
+      lastNameField: '',
+      cityField: '',
+      stateField: ''
+    });
+    this.props.updateProfile.call(
+      null, firstNameField, lastNameField, cityField, stateField
+    );
+  }
+
+  render() {
+    const { firstNameField, lastNameField, cityField, stateField } = this.state;    
     return (
       <div>
         <h3>Update Profile Information</h3>
@@ -112,9 +125,7 @@ class UpdateProfileForm extends Component {
           </label>
         </form>
         <button 
-          onClick={this.props.updateProfile.bind(
-            null, firstNameField, lastNameField, cityField, stateField
-            )}
+          onClick={this.handleUpdateClick}
         >
           Update
         </button>
@@ -220,6 +231,8 @@ class UserSettingsPage extends Component {
     });
 
     updatedProfile.then(({ data }) => {
+      // TODO: Find out why this isn't running
+      console.log(data);
       // only updates state if there is a value in the field
       this.setState({
         firstName: data.firstName || this.state.firstName,

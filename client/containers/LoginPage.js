@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -38,6 +39,15 @@ class LoginPage extends Component {
 
   handleLogin(event) {
     event.preventDefault();
+    if (!this.state.emailText) {
+      this.setState({ message: 'You must enter an email address' });
+      return;
+    } else if (!this.state.passwordText) {
+      this.setState({ message: 'You must enter a password' });
+      return;
+    } else {
+      this.setState({ message: '' });
+    }
     const response = axios.post('/login', {
       email: this.state.emailText,
       password: this.state.passwordText
@@ -88,6 +98,9 @@ class LoginPage extends Component {
         <div className='message-display'>
           {this.state.message}
         </div>
+        <p>
+          Sign up <Link to='/signup'>here</Link> if you don't have an account
+        </p>
       </div>
     );
   }

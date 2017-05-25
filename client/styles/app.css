@@ -93,25 +93,25 @@ button {
   border-radius: 5px;
 }
 
-button:hover:enabled {
+.no-touchevents button:hover:enabled {
   background: linear-gradient(#777, #1a1a1a);
   color: #fff;
   text-decoration: none;
 }
 
-button:active {
+.no-touchevents button:active {
   -webkit-transform: translateY(1px); 
   -ms-transform: translateY(1px);
   transform: translateY(1px);
 }
 
-.btn-inactive:active {
+.no-touchevents .btn-inactive:active {
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
 }
 
-button.btn-inactive:hover {
+.no-touchevents button.btn-inactive:hover {
   background: #fff;
   color: #777;
 }
@@ -121,6 +121,11 @@ button.btn-inactive:hover {
   margin-top: 10px;
   color: #d83636;
   font-size: .8em;
+}
+
+a {
+  color: #d83636;
+  text-decoration: none;
 }
 
 /* div containing book */

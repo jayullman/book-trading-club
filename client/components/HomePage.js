@@ -8,7 +8,7 @@ const HomePage = () => (
     <h2>Collect and Trade Books with Other Users!</h2>
     <p>
       Welcome to the club! This app allows you to trade books with other users. You must 
-      first <Link className='signup-link' to='/signup'>sign up</Link> and <Link className='login-link' to='/login'>log in</Link> before 
+      first <Link to='/signup'>sign up</Link> and <Link to='/login'>log in</Link> before 
       you can add books to your collection and request trades. You can accept or reject trades
       requested from other users.
     </p>
