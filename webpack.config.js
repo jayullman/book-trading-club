@@ -1,7 +1,8 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
 
-module.exports = {
+var config = {
   entry: './client/index.js',
   output: {
     filename: 'app.js',
@@ -27,9 +28,22 @@ module.exports = {
   devServer: {
     contentBase: __dirname + '/public'
   },
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
   watch: true,
   plugins: [
     new ExtractTextPlugin('styles.css')
   ]
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  );
+}
+
+module.exports = config;
