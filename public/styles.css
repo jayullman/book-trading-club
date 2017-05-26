@@ -636,7 +636,11 @@ header h1 {
 .burger-menu a.logout-link,
 .burger-menu a.settings-link {
   color: #fff !important;
-  margin: 0 0 15px 0 !important;
+  margin: 0 0 20px 20px !important;
+}
+
+nav.bm-item-list {
+  text-align: left;
 }
 
 /* links outside of sliding menu */
