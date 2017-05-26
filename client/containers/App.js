@@ -10,7 +10,6 @@ import BooksContainer from '../containers/BooksContainer';
 import UserSettingsPage from '../containers/UserSettingsPage';
 import Nav from '../components/Nav';
 import BookSearchPage from '../containers/BookSearchPage';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 import '../styles/app.css';
