@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import TradesPendingBox from '../components/TradesPendingBox';
 import PendingTradeDetails from '../components/PendingTradeDetails';
 import Spinner from '../components/Spinner';
+import Header from '../components/Header';
 
 import tradeApi from '../utils/tradeApi';
 
@@ -173,6 +174,7 @@ class BooksContainer extends Component {
 
     return (
       <div className='books-container-page'>
+        <Header />
         {/* Display the trade pending box if user is logged in */}
         {isLoggedIn &&
           <TradesPendingBox 

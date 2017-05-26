@@ -1,11 +1,10 @@
-// TODO: Show loading after searching for a book
-
 import React, { Component } from 'react';
 import axios from 'axios';
 
 // import npm module for Google Books API
 import * as books from 'google-books-search';
 
+import Header from '../components/Header';
 import Spinner from '../components/Spinner';
 import '../styles/booksearchpage.css';
 
@@ -78,6 +77,7 @@ class BookSearchPage extends Component {
   render() {
     return (
       <div>
+        <Header />
         <h3>Find books to add to your collection</h3>
         <form className='column' className='findbook-form' onSubmit={this.findBook}>
           <label htmlFor='book-search'>

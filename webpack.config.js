@@ -6,7 +6,8 @@ var config = {
   entry: './client/index.js',
   output: {
     filename: 'app.js',
-    path: path.join(__dirname, '/public')
+    path: path.join(__dirname, '/public'),
+    publicPath: './public/'
   },
   module: {
     rules: [
@@ -19,9 +20,15 @@ var config = {
             loader: 'eslint-loader',
           }
         ]
-      }, {
+      }, 
+      {
         test: /\.css$/,
         use: ExtractTextPlugin.extract('css-loader')
+      }, 
+      {
+        test: /\.(jpg|gif|png)$/,
+        use: 'file-loader?name=[name].[ext]',
+        include: path.join(__dirname, '/client/asstes')
       }
     ]
   },

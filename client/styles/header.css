@@ -1,5 +1,7 @@
 header {
-  background: #3a80b2;
+  /*background: #3a80b2;*/
+  background-image: url('/assets/books_hero.jpg');
+  background-size:cover;
   color: #fff;
   height: 100px;
   text-align: center;

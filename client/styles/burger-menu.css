@@ -79,13 +79,14 @@
   nav.navbar {
     display: none;
   }
-  header h1 {
-    margin-top: 38px !important;
+
+  nav.burger-menu {
+    text-align: right;
   }
   .allbooks-link,
   .mybooks-link,
   .addbooks-link {
-    float: right;
+    display: inline-block !important;
   }
 }
 

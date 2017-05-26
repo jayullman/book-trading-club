@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -98,9 +98,9 @@ class App extends Component {
             isLoggedIn={this.state.isLoggedIn}
             logOut={this.logOut.bind(this)}
           />
-          <Header />
           <Switch>
             <Route exact path='/' component={HomePage} />
+            {/*<Route path='/' component={Header} />*/}
             <Route path='/login' component={LoginPage} />
             <Route path='/signup' component={SignupPage} />
             <Route path='/allbooks' render={AllBooks} />

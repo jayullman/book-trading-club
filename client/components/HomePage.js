@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Hero from './Hero';
 
 import '../styles/homepage.css';
 
 const HomePage = () => (
   <div className='home-page'>
+    <Hero />
     <h2>Collect and Trade Books with Other Users!</h2>
     <p>
       Welcome to the club! This app allows you to trade books with other users. You must 

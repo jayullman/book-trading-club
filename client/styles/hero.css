@@ -1,0 +1,27 @@
+.hero {
+  background-image: url('/assets/books_hero.jpg');
+  background-size: cover;
+  position: relative;
+  height: 95vh;
+  width: 100%;
+}
+
+.hero-title {
+  color: #fff;
+  position: absolute;
+  top: 30%;
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-size: 4em;
+  font-weight: 300;
+}
+
+.down-arrow {
+  color: #fff;
+  position: absolute;
+  bottom: 15%;
+  -ms-transform: translateX(-50%); 
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%); 
+}

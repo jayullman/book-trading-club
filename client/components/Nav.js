@@ -58,8 +58,8 @@ class Nav extends Component {
           <NavLink className='allbooks-link' activeClassName='active-nav' to='/allbooks'>All Books</NavLink>
           {this.props.isLoggedIn === true
             && <NavLink className='mybooks-link' activeClassName='active-nav' to='/mybooks'>My Books</NavLink>}
-      </nav>
-    </div>
+        </nav>
+      </div>
     );
   }
 }

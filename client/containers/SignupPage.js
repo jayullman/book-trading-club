@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 import axios from 'axios';
+import Header from '../components/Header';
 
 class SignupPage extends Component {
   constructor(props) {
@@ -66,6 +66,7 @@ class SignupPage extends Component {
   render() {
     return (
       <div>
+        <Header />
         <h2>Sign Up</h2>
         <form className='column' onSubmit={this.handleSignup}>
           <label htmlFor='signup-email'>

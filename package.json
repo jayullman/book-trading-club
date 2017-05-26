@@ -6,8 +6,9 @@
   "scripts": {
     "serve": "webpack-dev-server --host 0.0.0.0",
     "start": "nodemon server.js",
+    "build-dev": "webpack",
     "build": "NODE_ENV='production' webpack -p",
-    "deploy": "git push heroku master"
+    "deploy": "npm build && git push heroku master"
   },
   "repository": {
     "type": "git",
@@ -50,6 +51,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.10.3",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2"
   }

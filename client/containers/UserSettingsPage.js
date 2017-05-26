@@ -6,9 +6,9 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import axios from 'axios';
 
+import Header from '../components/Header';
 import '../styles/usersettingspage.css';
 
 // this component will display the user's profile information
@@ -291,6 +291,7 @@ class UserSettingsPage extends Component {
     const { firstName, lastName, city, state } = this.state;
     return (
       <div className='user-settings-page'>
+        <Header />
         <h2>Settings Page for {this.props.currentUser}</h2>
         <UserProfile
           firstName={firstName}
