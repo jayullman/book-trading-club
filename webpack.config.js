@@ -28,7 +28,7 @@ var config = {
       {
         test: /\.(jpg|gif|png)$/,
         use: 'file-loader?name=[name].[ext]',
-        include: path.join(__dirname, '/client/asstes')
+        include: path.join(__dirname, '/client/assets')
       }
     ]
   },
